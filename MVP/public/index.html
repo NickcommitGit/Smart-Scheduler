@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Roadmap Generator</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Roadmap Generator</h1>
+    <form id="promptForm">
+        <label for="prompt">Enter your prompt:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <button type="submit">Generate</button>
+    </form>
+    <h2>Generated Response</h2>
+    <div id="responseContainer"></div>
+    <div class="buttons-container">
+        <button class="accept-btn" id="acceptBtn" style="display:none;">Accept</button>
+        <button class="reject-btn" id="rejectBtn" style="display:none;">Reject</button>
+    </div>
+    
+    <script>
+        // Get buttons by ID
+        const acceptBtn = document.getElementById('acceptBtn');
+        const rejectBtn = document.getElementById('rejectBtn');
+    
+        // Event listener for Accept button
+        acceptBtn.addEventListener('click', () => {
+            // Redirect to the same page
+            window.location.href = window.location.href; // Reloads the current page
+        });
+    
+        // Event listener for Reject button
+        rejectBtn.addEventListener('click', () => {
+            // Redirect to the same page
+            window.location.href = window.location.href; // Reloads the current page
+        });
+    
+        // You can show the buttons dynamically if needed
+        // Example: Show the buttons when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            acceptBtn.style.display = 'inline-block';
+            rejectBtn.style.display = 'inline-block';
+        });
+    </script>
+    
+    <script src="script.js">  
+    </script>
+</body>
+</html>

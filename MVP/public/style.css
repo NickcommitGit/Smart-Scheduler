@@ -1,0 +1,156 @@
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    flex-direction: column;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Form Styling */
+#promptForm {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #444;
+}
+
+input[type="text"] {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Response Container Styling */
+#responseContainer {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.6;
+    max-height: 400px; /* Fixed height */
+    overflow-y: auto; /* Scrollable content */
+}
+
+/* Styling for each day */
+.day-segment {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.day-title {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 8px;
+}
+
+/* Button Container Styling */
+.buttons-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.accept-btn, .reject-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.accept-btn {
+    background-color: green;
+    color: white;
+}
+
+.reject-btn {
+    background-color: red;
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #45a049;
+}
+
+.reject-btn:hover {
+    background-color: #e44a3c;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"] {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #responseContainer {
+        max-height: 300px; /* Adjust height for smaller screens */
+        padding: 10px;
+    }
+
+    .buttons-container {
+        width: 100%;
+    }
+
+    .accept-btn, .reject-btn {
+        width: 45%;
+        margin: 10px 2%;
+    }
+}
+
+@media (max-width: 480px) {
+    .accept-btn, .reject-btn {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}
