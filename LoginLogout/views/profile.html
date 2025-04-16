@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Additional Styling for Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .dark-mode .bg-white {
+            background-color: #2d3748;
+        }
+
+        .dark-mode .bg-gray-100 {
+            background-color: #1a202c;
+        }
+
+        .dark-mode .text-gray-800,
+        .dark-mode .text-gray-500,
+        .dark-mode .text-gray-400 {
+            color: #e2e8f0;
+        }
+
+        .dark-mode .text-blue-500:hover,
+        .dark-mode .text-yellow-500:hover,
+        .dark-mode .text-green-500:hover {
+            color: #d1d5db;
+        }
+
+        .dark-mode .text-red-500,
+        .dark-mode .text-purple-500 {
+            color: #d1d5db;
+        }
+
+        .dark-mode .bg-gray-50 {
+            background-color: #2d3748;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Dark Mode Toggle Icon -->
+    <div class="absolute top-4 right-4 cursor-pointer" onclick="toggleDarkMode()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 12v2m9-9h-2M3 12H1m16.243 5.657l-1.414-1.414M6.343 6.343L4.93 4.93m0 14.142L6.343 17.657M17.657 6.343L16.243 4.93" />
+        </svg>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-6 md:p-8">
+
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Left Section: Profile -->
+            <div class="col-span-1 bg-white shadow-lg rounded-lg p-6">
+                <div class="text-center">
+                    <!-- Profile Image -->
+                    <div class="relative inline-block">
+                        <img id="profile-pic" src="https://via.placeholder.com/150" alt="Profile" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-green-400">
+                        <!-- Edit Icon -->
+                        <label for="upload" class="absolute bottom-1 right-1 bg-gray-700 text-white p-1 rounded-full cursor-pointer">
+                            ✏️
+                        </label>
+                        <input id="upload" type="file" class="hidden" onchange="changeProfilePic(event)">
+                    </div>
+                    <!-- Name and Bio -->
+                    <h2 id="profile-name" class="text-2xl font-semibold mt-4 text-gray-800">Nikhil Mishra</h2>
+                    <p class="text-gray-500 text-sm">Rank: <span class="font-bold text-gray-800">632,453</span></p>
+                    <p class="text-gray-400 text-xs mt-1">GL Bajaj Institute, Noida</p>
+
+                    <!-- Edit Profile Button -->
+                    <button onclick="editProfile()" class="mt-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow">
+                        Edit Profile
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-6">
+                    <div class="flex items-center gap-2 mb-2 text-gray-700">
+                        <span>🔗</span>
+                        <a href="#" class="text-blue-500 hover:underline">gauravbaghel09 (GitHub)</a>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-700">
+                        <span>🔗</span>
+                        <a href="#" class="text-blue-500 hover:underline">LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Overview Section -->
+            <div class="col-span-1 lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
+                <!-- Activity Overview Header -->
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">142 submissions in the past one year</h3>
+                        <p class="text-sm text-gray-600">Total active days: <span class="font-medium">46</span> | Max streak: <span class="font-medium">12</span></p>
+                    </div>
+                    <!-- Year Selector -->
+                    <div>
+                        <select class="text-sm p-1 border rounded-md focus:outline-none focus:ring">
+                            <option value="2023" selected>2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Activity Grid -->
+                <div class="grid grid-cols-12 gap-1">
+                    <!-- Loop through 12 months -->
+                    <script>
+                        const months = 12;
+                        const weeksPerMonth = 5;
+                        let gridHTML = '';
+                        for (let m = 0; m < months; m++) {
+                            gridHTML += '<div class="flex flex-col gap-1 items-center">';
+                            for (let w = 0; w < weeksPerMonth; w++) {
+                                const level = Math.floor(Math.random() * 4); // Random activity level
+                                const colors = ["bg-gray-200", "bg-green-200", "bg-green-400", "bg-green-600"];
+                                gridHTML += `<div class="h-3 w-3 rounded ${colors[level]}"></div>`;
+                            }
+                            gridHTML += '</div>';
+                        }
+                        document.write(gridHTML);
+                    </script>
+                </div>
+
+                <!-- Month Labels at Bottom -->
+                <div class="grid grid-cols-12 gap-1 text-xs text-gray-500 mt-2">
+                    <div class="text-center">Jan</div>
+                    <div class="text-center">Feb</div>
+                    <div class="text-center">Mar</div>
+                    <div class="text-center">Apr</div>
+                    <div class="text-center">May</div>
+                    <div class="text-center">Jun</div>
+                    <div class="text-center">Jul</div>
+                    <div class="text-center">Aug</div>
+                    <div class="text-center">Sep</div>
+                    <div class="text-center">Oct</div>
+                    <div class="text-center">Nov</div>
+                    <div class="text-center">Dec</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Overview Section -->
+        <div class="container mx-auto my-10 px-4">
+            <!-- Profile Wrapper -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <!-- Header -->
+                <h1 class="text-center text-2xl font-bold text-gray-800 mb-6">Progress Overview</h1>
+
+                <!-- Progress Circles Section -->
+                <div class="flex flex-wrap justify-center gap-6">
+                    <!-- Progress Circle 1 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block w-24 h-24 sm:w-28 sm:h-28 transform transition duration-300 group-hover:scale-110">
+                            <svg class="transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#E5E7EB" stroke-width="8" fill="none" />
+                                <circle cx="50" cy="50" r="45" stroke="#EF4444" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="14" />
+                            </svg>
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-lg font-bold text-red-500">
+                                95%
+                            </div>
+                        </div>
+                        <p class="mt-2 text-red-500 font-semibold">Completion</p>
+                    </div>
+
+                    <!-- Progress Circle 2 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block w-24 h-24 sm:w-28 sm:h-28 transform transition duration-300 group-hover:scale-110">
+                            <svg class="transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#E5E7EB" stroke-width="8" fill="none" />
+                                <circle cx="50" cy="50" r="45" stroke="#F59E0B" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="212" />
+                            </svg>
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-lg font-bold text-yellow-500">
+                                25%
+                            </div>
+                        </div>
+                        <p class="mt-2 text-yellow-500 font-semibold">Pending</p>
+                    </div>
+
+                    <!-- Progress Circle 3 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block w-24 h-24 sm:w-28 sm:h-28 transform transition duration-300 group-hover:scale-110">
+                            <svg class="transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#E5E7EB" stroke-width="8" fill="none" />
+                                <circle cx="50" cy="50" r="45" stroke="#8B5CF6" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="127" />
+                            </svg>
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-lg font-bold text-purple-500">
+                                55%
+                            </div>
+                        </div>
+                        <p class="mt-2 text-purple-500 font-semibold">Achieved</p>
+                    </div>
+
+                    <!-- Progress Circle 4 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block w-24 h-24 sm:w-28 sm:h-28 transform transition duration-300 group-hover:scale-110">
+                            <svg class="transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#E5E7EB" stroke-width="8" fill="none" />
+                                <circle cx="50" cy="50" r="45" stroke="#3B82F6" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="57" />
+                            </svg>
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-lg font-bold text-blue-500">
+                                80%
+                            </div>
+                        </div>
+                        <p class="mt-2 text-blue-500 font-semibold">Productivity</p>
+                    </div>
+
+                    <!-- Progress Circle 5 -->
+                    <div class="text-center group">
+                        <div class="relative inline-block w-24 h-24 sm:w-28 sm:h-28 transform transition duration-300 group-hover:scale-110">
+                            <svg class="transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" stroke="#E5E7EB" stroke-width="8" fill="none" />
+                                <circle cx="50" cy="50" r="45" stroke="#38BDF8" stroke-width="8" fill="none"
+                                    stroke-dasharray="283" stroke-dashoffset="170" />
+                            </svg>
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-lg font-bold text-sky-400">
+                                40%
+                            </div>
+                        </div>
+                        <p class="mt-2 text-sky-400 font-semibold">Utilization</p>
+                    </div>
+                </div>
+
+                <!-- Description Section -->
+                <div class="mt-8 text-center">
+                    <h2 class="text-lg font-bold text-gray-800">Performance Insights</h2>
+                    <p class="text-gray-600 mt-2 mx-auto max-w-3xl text-sm sm:text-base">
+                        This section highlights your current progress across key areas. Keep up the good work and aim for consistency to maximize your productivity and achieve your goals!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto my-10 px-1">
+        <!-- Start Your Journey Section -->
+        <div class="bg-white shadow-lg rounded-lg p-4">
+            <h2 class="text-center text-3xl font-bold text-gray-800 mb-20">
+                Start Your Journey!
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Operating System Card -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center justify-center mb-4">
+                        <img src="https://img.icons8.com/ios-filled/50/3B82F6/server.png" alt="OS Icon" />
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2 text-center">
+                        Operating System
+                    </h3>
+                    <p class="text-gray-500 text-sm text-center mb-4">
+                        Learn processes, threads, and memory management in OS.
+                    </p>
+                    <div class="flex justify-center">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Java Card -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center justify-center mb-4">
+                        <img src="https://img.icons8.com/ios-filled/50/F59E0B/java-coffee-cup-logo.png" alt="Java Icon" />
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2 text-center">
+                        Java Programming
+                    </h3>
+                    <p class="text-gray-500 text-sm text-center mb-4">
+                        Master object-oriented programming and Java concepts.
+                    </p>
+                    <div class="flex justify-center">
+                        <button class="bg-yellow-500 text-white py-2 px-4 rounded-full hover:bg-yellow-600 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DBMS Card -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center justify-center mb-4">
+                        <img src="https://img.icons8.com/ios-filled/50/10B981/database.png" alt="DBMS Icon" />
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2 text-center">
+                        DBMS
+                    </h3>
+                    <p class="text-gray-500 text-sm text-center mb-4">
+                        Explore database management and SQL fundamentals.
+                    </p>
+                    <div class="flex justify-center">
+                        <button class="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode toggle function
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Profile Image change function
+        function changeProfilePic(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                document.getElementById('profile-pic').src = reader.result;
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Edit Profile function (for demo purposes)
+        function editProfile() {
+            alert("Edit Profile functionality is a work in progress.");
+        }
+    </script>
+</body>
+
+</html>

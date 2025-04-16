@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Scheduler</title>
+    <link rel="stylesheet" href="stylemain.css">
+   
+</head>
+<body>
+
+    <!-- Left Panel with Navigation -->
+    <div class="left-panel">
+        <a onclick="navigate('profile')">Profile</a> 
+        <a onclick="navigate('goal')">Goal</a>
+        <a onclick="navigate('achievements')">Achievements</a>
+        <a onclick="navigate('roadmap')">Roadmap Generator</a>
+    </div>
+
+    <!-- Middle Panel with Roadmap Generator -->
+    <div class="middle-panel">
+        <iframe id="content-frame" src="http://localhost:5000"></iframe>
+    </div>
+
+    <!-- Right Panel with Profile Section -->
+    <div class="right-panel">
+        <div class="profile-logo" onclick="toggleProfile()"></div>
+        <div class="profile-modal" id="profile-modal">
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="user-name">Nikhil Mishra</span></p>
+                <p><strong>Email:</strong> <span id="user-email">nikhilalphacoder@gmail.com</span></p>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        function navigate(section) {
+            const frame = document.getElementById('content-frame');
+            switch (section) {
+                case 'profile':
+                    frame.src = '/profile.html'; // Replace with actual profile page
+                    break;
+                case 'settings':
+                    frame.src = '/settings.html'; // Replace with actual settings page
+                    break;
+                case 'goal':
+                    frame.src = '/goal.html'; // Replace with actual goal page
+                    break;
+                case 'achievements':
+                    frame.src = '/achievements.html'; // Replace with actual achievements page
+                    break;
+                case 'roadmap':
+                    frame.src = 'http://localhost:5000'; // Roadmap generator (running on a different port)
+                    break;
+                default:
+                    frame.src = '/';
+            }
+        }
+
+        function toggleProfile() {
+            const modal = document.getElementById('profile-modal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function logout() {
+            // Handle the logout logic here (e.g., clear session, redirect to login page)
+            window.location.href = '/index.html'; // Redirect to login page
+        }
+
+        // Example of setting user details dynamically (Fetch user details from backend)
+        document.getElementById('user-name').innerText = "Nikhil Mishra"; // Set dynamically
+        document.getElementById('user-email').innerText = "nikhilalphacoder@gmail.com"; // Set dynamically
+    </script>
+
+</body>
+</html>
